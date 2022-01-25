@@ -1,10 +1,10 @@
 package com.example.expense.tracker.exception;
 
-public class InternalServerError extends RuntimeException{
+public class InternalServerErrorException extends RuntimeException{
 
     private static final long serialVersionUID = 2L;
 
-    public InternalServerError(String s) {
+    public InternalServerErrorException(String s) {
         super(s);
     }
 }
