@@ -1,11 +1,13 @@
 package com.example.expense.tracker.service;
 
+import com.example.expense.tracker.config.Constants;
 import com.example.expense.tracker.dto.TransactionDto;
 import com.example.expense.tracker.exception.InternalServerErrorException;
 import com.example.expense.tracker.exception.UserNotFoundException;
 import com.example.expense.tracker.models.Transactions;
 import com.example.expense.tracker.models.User;
 import com.example.expense.tracker.repository.TransactionRepository;
+import com.example.expense.tracker.repository.UserRepository;
 import com.example.expense.tracker.service.interfaces.ExpenseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +22,16 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public String addUserTransaction(TransactionDto transactions) {
         LOGGER.info("Inside {} to add users expenses",ExpenseServiceImpl.class);
 
         LOGGER.info("Calling user repository to fetch the userId mapped with {}", transactions.getEmailId());
         try{
-            User user = null; //call userRepo
+            User user = userRepository.getByEmail(transactions.getEmailId());
 
             if(user == null)
                 throw new UserNotFoundException("User with email " + transactions.getEmailId() +" not found.");
@@ -39,7 +44,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         }catch(Exception exception){
             throw new InternalServerErrorException("Sorry we are unable to process this request, Please try again later.");
         }
-        return "Success";
+        return Constants.SUCCESS;
     }
 
     private Transactions mapToTransaction(Long userId, TransactionDto trans) {

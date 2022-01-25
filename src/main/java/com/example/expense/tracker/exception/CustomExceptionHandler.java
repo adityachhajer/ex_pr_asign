@@ -17,4 +17,9 @@ public class CustomExceptionHandler {
     public ResponseEntity<Object> internalServerError(InternalServerErrorException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(EmailAlreadyPresentException.class)
+    public ResponseEntity<Object> handleUserAlreadyFound(EmailAlreadyPresentException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

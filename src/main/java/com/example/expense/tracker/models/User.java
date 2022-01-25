@@ -1,6 +1,7 @@
 package com.example.expense.tracker.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
@@ -21,6 +22,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Size(min = 8,max = 500)
     @Column(nullable = false)
     private String password;
 

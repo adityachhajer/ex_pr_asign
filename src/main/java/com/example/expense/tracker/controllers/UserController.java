@@ -1,8 +1,8 @@
 package com.example.expense.tracker.controllers;
 
 import com.example.expense.tracker.config.Constants;
-import com.example.expense.tracker.dto.TransactionDto;
-import com.example.expense.tracker.service.interfaces.ExpenseService;
+import com.example.expense.tracker.dto.UserDto;
+import com.example.expense.tracker.service.interfaces.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/expenses")
-public class ExpenseController {
+@RequestMapping("/user")
+public class UserController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExpenseController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private ExpenseService expenseService;
+    private UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<String> addTransactions(@RequestBody TransactionDto transaction){
-        LOGGER.info("Inside {} to add the transactions",this.getClass());
+    public ResponseEntity<String> addUser(@RequestBody UserDto userDto){
+        LOGGER.info("Inside post mapping of UserController to add a new user.");
 
-        expenseService.addUserTransaction(transaction);
+        userService.addUser(userDto);
         return new ResponseEntity<>(Constants.SUCCESS, HttpStatus.OK);
     }
+
 }
