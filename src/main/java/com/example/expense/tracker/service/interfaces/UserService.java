@@ -4,5 +4,5 @@ import com.example.expense.tracker.dto.UserDto;
 
 public interface UserService {
 
-    public String addUser(UserDto userDto);
+    String addUser(UserDto userDto);
 }

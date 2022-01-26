@@ -5,5 +5,5 @@ import com.example.expense.tracker.dto.TransactionDto;
 
 public interface ExpenseService {
 
-    public String addUserTransaction(TransactionDto transactions);
+    String addUserTransaction(TransactionDto transactions);
 }
